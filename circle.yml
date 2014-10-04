@@ -1,4 +1,5 @@
 deployment:
   master:
     branch: master
-    commands: ssh tilde.club "echo hi paul"
+    commands:
+      - ssh tilde.club "echo hi paul"
