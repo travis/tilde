@@ -2,4 +2,4 @@ deployment:
   master:
     branch: master
     commands:
-      - rsync -avz . travis@tilde.club:~/
+      - rsync -avz * travis@tilde.club:~/
