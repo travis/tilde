@@ -24,13 +24,13 @@
 
   :uberjar-name "tilde.jar"
 
-  :cljsbuild {:builds {:app {:source-paths ["src/cljs"]
-                             :compiler {:output-to     "resources/public/app.js"
-                                        :output-dir    "resources/public/out"
-                                        :source-map    "resources/public/out.js.map"
+  :cljsbuild {:builds {:dev {:source-paths ["src/cljs"]
+                             :compiler {:output-to     "public_html/main.js"
+                                        :output-dir    "public_html/out"
+                                        :source-map    "public_html/out.js.map"
                                         :preamble      ["react/react.min.js"]
                                         :externs       ["react/externs/react.js"]
-                                        :optimizations :none
+                                        :optimizations :whitespace
                                         :pretty-print  true}}
                        :tilde
                        {:source-paths ["src/cljs"]
