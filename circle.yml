@@ -2,4 +2,4 @@ deployment:
   master:
     branch: master
     commands:
-      - ssh tilde.club "echo hi paul"
+      - ssh travis@tilde.club "echo hi paul"
