@@ -10,3 +10,4 @@ pom.xml.asc
 /resources/public
 /out
 /.repl
+public_html/main.js

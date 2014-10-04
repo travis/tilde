@@ -31,7 +31,13 @@
                                         :preamble      ["react/react.min.js"]
                                         :externs       ["react/externs/react.js"]
                                         :optimizations :none
-                                        :pretty-print  true}}}}
+                                        :pretty-print  true}}
+                       :tilde
+                       {:source-paths ["src/cljs"]
+                        :compiler {:output-to "public_html/main.js"
+                                   :preamble      ["react/react.min.js"]
+                                   :externs       ["react/externs/react.js"]
+                                   :optimizations :advanced}}}}
 
   :profiles {:dev {:repl-options {:init-ns tilde.server
                                   :nrepl-middleware [cemerick.piggieback/wrap-cljs-repl]}
