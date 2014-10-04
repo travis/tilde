@@ -2,4 +2,4 @@ deployment:
   master:
     branch: master
     commands:
-      - ssh travis@tilde.club "echo hi paul"
+      - rsync . travis@tilde.club:~/deploy
