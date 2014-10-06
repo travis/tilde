@@ -3,4 +3,4 @@ deployment:
     branch: master
     commands:
       - lein cljsbuild once tilde
-      - rsync -vz * travis@tilde.club:~/
+      - rsync -rvz * travis@tilde.club:~/
