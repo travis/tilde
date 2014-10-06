@@ -14,7 +14,9 @@
 (def firebase (js/Firebase. "https://burning-heat-936.firebaseio.com/players"))
 (def prefs (local-storage (atom {}) :prefs))
 
-(defn player-id [] (or (:player-id @prefs) (swap! prefs assoc :player-id (uuid/make-random))))
+(defn player-id []
+  (or (:player-id @prefs)
+      (swap! prefs assoc :player-id (uuid/make-random))))
 
 (defn coords []
   (let [[x y] (:coords @prefs)]
@@ -23,13 +25,17 @@
 (defn message []
   (or (:message @prefs) ""))
 
+(defn color []
+  (or (:color @prefs)
+      (swap! prefs assoc :color (str "#"(.toString (rand-int 16rFFFFFF) 16)))))
+
 (defn speed []
   4)
 
 (defn player-name []
   (or (:name @prefs) "rfb"))
 
-(defn player-view [[id {:keys [name message]
+(defn player-view [[id {:keys [name message color]
                         [x y] :coords
                         :as player}] owner]
   (reify
@@ -37,13 +43,14 @@
     (render [_]
       (dom/div #js {:style #js {"position" "absolute" "top" (+ 30 y) "left" x}}
                (dom/div #js {:style #js {"position" "relative" "left" 9 "top" -3 "font-family" "monospace" "color" "grey" "font-size" "50%" }} name)
-               (dom/div #js {:style #js {"position" "absolute" "left" 0 "top" 0 "font-family" "monospace" "background-color" (str "#"(.toString (rand-int 16rFFFFFF) 16)) "width" "5px" "height" "5px"}} "")
+               (dom/div #js {:style #js {"position" "absolute" "left" 0 "top" 0 "font-family" "monospace" "background-color" (or color "red") "width" "5px" "height" "5px"}} "")
                (dom/div #js {:style #js {"position" "relative" "font-family" "monospace"}} message)))))
 
 (defn push-current-user []
   (.push firebase (clj->js {:id (str (player-id))
                             :name (player-name)
                             :coords (coords)
+                            :color (color)
                             :message (message)})))
 
 (defn bound-x [x]
@@ -101,10 +108,10 @@
          (events/listen (KeyHandler. js/document) EventType.KEY
                         (fn [event]
                           (case (.-keyCode event)
-                            37 (update-coords! back identity)
-                            38 (update-coords! identity back)
-                            39 (update-coords! fwd identity)
-                            40 (update-coords! identity fwd)
+                            37 (do (update-coords! back identity) (.preventDefault event))
+                            38 (do (update-coords! identity back) (.preventDefault event))
+                            39 (do (update-coords! fwd identity) (.preventDefault event))
+                            40 (do  (update-coords! identity fwd) (.preventDefault event))
                             ;;191 (.focus (om/get-node owner "message"))
                             nil))))))
    app-state
