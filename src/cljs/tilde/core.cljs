@@ -68,8 +68,11 @@
   (push-current-user))
 
 (defn handle-update-message [e app owner]
-  (swap! prefs assoc :message (-> e .-target .-value))
-  (push-current-user))
+  (when (== (.-which e) 13)
+    (let [target (.-target e)]
+     (swap! prefs assoc :message (.-value target))
+     (set! (.-value target) ""))
+    (push-current-user)))
 
 (defn update-coords! [move-x move-y]
   (swap! prefs (fn [{[x y] :coords :as prefs}]
@@ -99,12 +102,12 @@
                 (dom/input
                  #js {:placeholder "color"
                       :onChange #(handle-update-color % app owner)})
-                (dom/span #js {:style #js {"color" "grey" "margin-left" "5px"}} "use your arrow keys to move around")
+                (dom/span #js {:style #js {"color" "grey" "margin-left" "5px"}} "use your arrow keys to move around - hit return in the message box to post a message")
                 (om/build-all player-view players)))
        om/IWillMount
        (will-mount [_]
          (-> firebase
-             (.limit 100)
+             (.limit 1000)
              (.on "child_added" (fn [snapshot]
                                   (let [{:keys [id name coords] :as updated-player} (js->clj (.val snapshot) :keywordize-keys true)]
                                     (om/update! players id updated-player)))))
