@@ -67,6 +67,10 @@
   (swap! prefs assoc :name (-> e .-target .-value))
   (push-current-user))
 
+(defn handle-update-color [e app owner]
+  (swap! prefs assoc :color (-> e .-target .-value))
+  (push-current-user))
+
 (defn handle-update-message [e app owner]
   (when (== (.-which e) 13)
     (swap! prefs assoc :message (-> e .-target .-value))
@@ -97,6 +101,9 @@
                 (dom/input
                  #js {:placeholder "message" :ref "message"
                       :onKeyDown #(handle-update-message % app owner)})
+                (dom/input
+                 #js {:placeholder "color"
+                      :onChange #(handle-update-color % app owner)})
                 (om/build-all player-view players)))
        om/IWillMount
        (will-mount [_]
