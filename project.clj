@@ -15,7 +15,9 @@
                  [figwheel "0.1.4-SNAPSHOT"]
                  [environ "1.0.0"]
                  [com.cemerick/piggieback "0.1.3"]
-                 [weasel "0.4.0-SNAPSHOT"]]
+                 [weasel "0.4.0-SNAPSHOT"]
+                 [alandipert/storage-atom "1.2.3"]
+                 [cljs-uuid "0.0.4"]]
 
   :plugins [[lein-cljsbuild "1.0.3"]
             [lein-environ "1.0.0"]]
@@ -30,7 +32,7 @@
                                         :source-map    "public_html/out.js.map"
                                         :preamble      ["react/react.min.js"]
                                         :externs       ["react/externs/react.js"]
-                                        :optimizations :whitespace
+                                        :optimizations :none
                                         :pretty-print  true}}
                        :tilde
                        {:source-paths ["src/cljs"]
