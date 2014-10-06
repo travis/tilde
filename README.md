@@ -1,6 +1,6 @@
 # tilde
 
-![Built With CircleCI](https://circleci.com/gh/travis/tilde.svg?style=shield&circle-token=4d826d4588c59633370b5eb7c8c039d4d349b494)
+[![Circle CI](https://circleci.com/gh/travis/tilde/tree/master.png?style=badge&circle-token=edfb74fdfe2e468c37132ecdc0eb5c77f8b0dcf6)](https://circleci.com/gh/travis/tilde/tree/master)
 
 ## Development
 
