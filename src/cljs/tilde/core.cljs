@@ -41,7 +41,7 @@
   (reify
     om/IRender
     (render [_]
-      (dom/div #js {:style #js {"position" "absolute" "top" (+ 30 y) "left" x}}
+      (dom/div #js {:style #js {"position" "absolute" "top" (+ 40 y) "left" x}}
                (dom/div #js {:style #js {"position" "relative" "left" 9 "top" -3 "font-family" "monospace" "color" "grey" "font-size" "50%" }} name)
                (dom/div #js {:style #js {"position" "absolute" "left" 0 "top" 0 "font-family" "monospace" "background-color" (or color "red") "width" "5px" "height" "5px"}} "")
                (dom/div #js {:style #js {"position" "relative" "font-family" "monospace"}} message)))))
@@ -54,14 +54,10 @@
                             :message (message)})))
 
 (defn bound-x [x]
-  (-> x
-      (max 0)
-      (min 1000)))
+  (mod x 1000))
 
 (defn bound-y [y]
-  (-> y
-      (max 0)
-      (min 1000)))
+  (mod y 1000))
 
 (defn handle-update-name [e app owner]
   (swap! prefs assoc :name (-> e .-target .-value))
