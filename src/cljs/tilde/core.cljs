@@ -37,7 +37,7 @@
     (render [_]
       (dom/div #js {:style #js {"position" "absolute" "top" (+ 30 y) "left" x}}
                (dom/div #js {:style #js {"position" "relative" "left" 9 "top" -3 "font-family" "monospace" "color" "grey" "font-size" "50%" }} name)
-               (dom/div #js {:style #js {"position" "absolute" "left" 0 "top" 0 "font-family" "monospace" "background-color" "red" #_(str "#") "width" "5px" "height" "5px"}} "")
+               (dom/div #js {:style #js {"position" "absolute" "left" 0 "top" 0 "font-family" "monospace" "background-color" (str "#"(.toString (rand-int 16rFFFFFF) 16)) "width" "5px" "height" "5px"}} "")
                (dom/div #js {:style #js {"position" "relative" "font-family" "monospace"}} message)))))
 
 (defn push-current-user []

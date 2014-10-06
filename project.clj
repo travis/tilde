@@ -31,14 +31,16 @@
                                         :output-dir    "public_html/out"
                                         :source-map    "public_html/out.js.map"
                                         :preamble      ["react/react.min.js"]
-                                        :externs       ["react/externs/react.js"]
+                                        :externs       ["react/externs/react.js"
+                                                        "externs/firebase.js"]
                                         :optimizations :none
                                         :pretty-print  true}}
                        :tilde
                        {:source-paths ["src/cljs"]
                         :compiler {:output-to "public_html/main.js"
                                    :preamble      ["react/react.min.js"]
-                                   :externs       ["react/externs/react.js"]
+                                   :externs       ["react/externs/react.js"
+                                                   "externs/firebase.js"]
                                    :optimizations :advanced}}}}
 
   :profiles {:dev {:repl-options {:init-ns tilde.server
