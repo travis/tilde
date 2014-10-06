@@ -72,9 +72,8 @@
   (push-current-user))
 
 (defn handle-update-message [e app owner]
-  (when (== (.-which e) 13)
-    (swap! prefs assoc :message (-> e .-target .-value))
-    (push-current-user)))
+  (swap! prefs assoc :message (-> e .-target .-value))
+  (push-current-user))
 
 (defn update-coords! [move-x move-y]
   (swap! prefs (fn [{[x y] :coords :as prefs}]
@@ -104,6 +103,7 @@
                 (dom/input
                  #js {:placeholder "color"
                       :onChange #(handle-update-color % app owner)})
+                (dom/span #js {:style #js {"color" "grey" "margin-left" "5px"}} "use your arrow keys to move around")
                 (om/build-all player-view players)))
        om/IWillMount
        (will-mount [_]
